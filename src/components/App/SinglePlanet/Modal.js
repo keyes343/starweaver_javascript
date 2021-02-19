@@ -140,8 +140,21 @@ const Modal = ({x, planet}) => {
 
                         <div style={{color:'black', border:'2px solid maroon', borderRadius:'1rem', margin:'2rem 0 0', textAlign:'center', fontSize:'1.4rem',
                         cursor:'pointer'}} onClick={()=>{
-                            x.setShowModal(false);
-                            alert('Your data has been saved')
+                            let toContinue = true;
+                            fields.forEach(field => {
+                                if( !!newData[field] ){
+                                    return;
+                                }else{
+                                    toContinue = false;
+                                    return;
+                                };
+                            })
+                            if(toContinue){
+                                alert('Your data has been saved')
+                                x.setShowModal(false);
+                            }else{
+                                alert('Some data is missing, please do not leave an empty field');
+                            }
                         }} >
                             Submit
                         </div>
